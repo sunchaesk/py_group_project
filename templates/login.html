@@ -15,18 +15,22 @@ overflow-y: scroll;
 {% block content %}
 <div class="container d-flex text-center PYG-scroll-child" style="width:100vw; height:100vh;">
   <form class="signin" style="margin-top: auto; margin-bottom: auto;">
-    <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}" style="width:10%;">
+
+    <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10%;">
     <h1 class="mb-4"> Log in </h1>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input style="width:20rem; margin-left:auto;margin-right:auto;" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
     <label for="inputPassword" class="sr-only">Password</label>
     <input style="margin-left:auto;margin-right:auto;width:20rem;"
            type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required="">
-    <div class="checkbox mb-3">
+
+    <span class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
-    </div>
+    
+    <a href="/signup"><p style="margin-left:5 "><small>Don't have an account</small></a>
+    <span>
     <button style="margin-left:auto; margin-right: auto; width: 10rem;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
   </form>
