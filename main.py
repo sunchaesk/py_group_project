@@ -1,3 +1,4 @@
+
 from flask import Flask, redirect, url_for, render_template, make_response, request, flash
 from flask_wtf import FlaskForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
@@ -47,11 +48,9 @@ class Login(FlaskForm):
 	email = StringField('Email Address', [validators.Length(min=6, max=35)])
 	password=PasswordField('Password', [validators.DataRequired()])
 
-
 @app.route("/")
 def home():
     return render_template("index.html", content="Testing")
-
 
 @app.route("/about")
 def about():
@@ -87,8 +86,6 @@ def signup():
 
 @app.route("/login", methods=["POST","GET"])
 def login():
-
-
     return render_template("login.html")
 
 
