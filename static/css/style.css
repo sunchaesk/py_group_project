@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 
-.PYG-nav-items {
-    font-family: 'Ubuntu Mono', monospace;
+body {
+    display: flex;
+    display-direction: column;
 }
 
 a.PYG-nav-items {
-    font-size: 20px;
+    font-size: 990px;
 }
