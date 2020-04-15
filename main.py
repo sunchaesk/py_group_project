@@ -67,6 +67,25 @@ def about():
 
     return render_template("about.html", content="AboutTesting")
 
+
+
+@app.route("/login", methods=["POST","GET"])
+def login():
+	form=Login(prefix="b")
+	ph = PasswordHasher()
+	if request.method=="POST":
+		usrLogin= user.query.filter_by(email = form.email.data).first()
+		if usrLogin:
+			try:
+				if ph.verify(usrLogin.password, form.password.data):
+					return redirect(url_for("home"))
+			except:
+				flash("The password you entered is not valid")
+		else:
+			flash("The email or password you enetered not valid ")
+
+	return render_template("login.html",form=form)
+
 @app.route("/signup", methods=["POST","GET"])
 def signup():
 	form= Signup(prefix="a")
@@ -100,12 +119,7 @@ def signup():
 
 	return render_template("signup.html",form=form)
 
-@app.route("/login", methods=["POST","GET"])
-def login():
-	form=Login()
 
-
-	return render_template("login.html",form=form)
 
 
 if __name__ == "__main__":

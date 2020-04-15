@@ -13,15 +13,15 @@
 
     <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10vw;">
     <h1 class="mb-4"> Sign Up </h1>
-     {% with messages= get_flashed_messages() %}
-            {% if messages %}
-                {% for msg in messages %}
-                  <p>The name or account is already created
-                {% endfor %}
-            {% endif %}
+     {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                   {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+          
+        {% endif %}
       {% endwith %}
- 
-    {{ form.csrf_token }}
+    {{ form.hidden_tag() }}
     {{ form.username(placeholder="Nickname", size=40,style="width: 20vw; height:40px;") }}
     {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;") }}
     {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}

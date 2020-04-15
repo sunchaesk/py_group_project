@@ -17,12 +17,19 @@ overflow-y: scroll;
                                                                   height:100vh;
                                                                   margin-right:auto;
                                                                   margin-left:auto;">
-  <form class="signin" style="margin-top: auto; margin-bottom: auto;">
-
+  <form method="post" class="signin" style="margin-top: auto; margin-bottom: auto;">
     <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10vw;">
     <h1 class="mb-4"> Log In </h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                   {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+          
+        {% endif %}
+    {% endwith %}
     {{ form.hidden_tag() }}
-    {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;") }}
+    {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;", type="email") }}
     {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}
     <a href="/signup"><p style="margin-left:5 "><small>Don't have an account</small></a>
     <span>
