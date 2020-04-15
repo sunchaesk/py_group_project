@@ -1,0 +1,7 @@
+pip
+flask
+os
+Flask-WTF
+time
+argon2
+Flask-SQLAlchemy
