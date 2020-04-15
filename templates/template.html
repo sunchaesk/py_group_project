@@ -8,10 +8,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"/>
     <style type="text/css">
       .PYG-pointer{
           cursor: pointer;
+      }
+      .PYG-IBM-font{
+          font-family: "IBM Plex Mono", monospace;
+      }
+      .PYG-nav-items {
+          font-family: 'Ubuntu Mono', monospace;
       }
       {% block css %}
       {% endblock %}
@@ -22,7 +29,7 @@
     <!--header -->
     <div class="bg-dark">
       <div class="container">
-        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
+        <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4  bg-dark border-bottom box-shadow">
           <img src="../static/images/python-logo.png" style="width:5%;
                                                              margin-right:10px;"
                class="PYG-pointer" onclick="location='/'">
@@ -46,7 +53,7 @@
     <!--main body end-->
 
     <!--footer-->
-    <footer id="sticky-footer" class="py-4 bg-dark text-white-50 PYG-scroll-child">
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
       <div class="container text-center">
         <small>Copyright &copy; Python Thing Group</small>
       </div>
@@ -54,6 +61,3 @@
     <!--footer end -->
   </body>
 </html>
-
-
-

@@ -2,31 +2,44 @@
 
 {% block title %} Sign up {% endblock %}
 
+{% block css %}
+{% endblock %}
 
-  
-  <div class="container d-flex text-center PYG-scroll-child " style="width:20vw; height:100vh;">
-  <form class="signup" style="margin-top: 30px; margin-bottom: auto;" method="post" style="width: 50px; height: 50px;">
-    <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:20%;">
-    
-    <h1 class="mb-4"> Sign up </h1>
-   		{{ form.hidden_tag() }}
-   		{{ form.username(placeholder="Enter a name", size=40,style="width: 20vw; height:40px;") }}
-   		</br>
-      </br>
-   		{{ form.email(placeholder="Enter an email" ,size=40, style="width: 20vw; height:40px;") }}
-   		</br>
-      </br>
-   		{{ form.password(placeholder="Enter a password",size=40,style="width: 20vw; height:40px;") }}
-   		</br>
-      </br>
-   		{{ form.confirm(placeholder="repeat the password",size=40,style="width: 20vw; height:40px;") }}
-   		
-   	<button style="margin-left:auto; margin-right: auto; width: 10rem;" class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+{% block content %}
 
+<div class="container d-flex text-center PYG-scroll-child " style="width:20vw; height:100vh;">
+
+  <form method="post" class="signin" style="margin-top: auto; margin-bottom: auto;">
+
+    <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10vw;">
+    <h1 class="mb-4"> Sign Up </h1>
+     {% with messages= get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                  <p>The name or account is already created
+                {% endfor %}
+            {% endif %}
+      {% endwith %}
+ 
+    {{ form.csrf_token }}
+    {{ form.username(placeholder="Nickname", size=40,style="width: 20vw; height:40px;") }}
+    {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;") }}
+    {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}
+    {{ form.confirm(placeholder="Confirm Passwaord",size=40,style="width: 20vw; height:40px;") }}
+    <button style="margin-left:auto; margin-right: auto;width: 20vw;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
   </form>
 </div>
 
-    
+
 
 
 {% endblock %}
+
+<!-- Comment 
+{{ form.hidden_tag() }}
+{{ form.username(placeholder="Nickname", size=40,style="width: 20vw; height:40px;") }}
+{{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;") }}
+{{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}
+{{ form.confirm(placeholder="Confirm Passwaord",size=40,style="width: 20vw; height:40px;") }}
+-->
