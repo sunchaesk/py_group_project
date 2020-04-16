@@ -1,4 +1,3 @@
-
 from flask import Flask, redirect, url_for, render_template, make_response, request, flash
 from flask_wtf import FlaskForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
@@ -9,11 +8,15 @@ from flask_wtf.csrf import CSRFProtect
 import flask_wtf
 from flask_sqlalchemy import SQLAlchemy
 from wtforms import validators
+from argon2 import PasswordHasher
+from wtforms.fields.html5 import EmailField
 import os
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///main.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///test.sqlite3'
+
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"]=False
 
 key=os.urandom(12).hex()
 
@@ -22,22 +25,25 @@ app.secret_key = key
 db = SQLAlchemy(app)
 
 
-class User(db.Model):
-	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-	name = db.Column(db.String(100), unique=True)
-	email = db.Column(db.String(100), unique=True)
-	password=PasswordField(db.String(50))
+class user(db.Model):
+	_id = db.Column("id",db.Integer, primary_key=True)
+	name = db.Column(db.String(100))
+	email= db.Column(db.String(100))
+	password = db.Column(db.String(100))
 
 	def __init__(self,name,email,password):
-		self.username=name
-		self.username=email
-		self.username=password
+		self.name= name
+		self.email=email
+		self.password=password
+
+	def __repr__(self):
+	        return f"User( {self.name}, {self.email})"
 		
-db.create_all()	
+#db.create_all()	
 
 class Signup(FlaskForm):
-	username = StringField('Username', [validators.DataRequired(message="Fill out this field pls"),validators.Length(min=4, max=25)])
-	email = StringField('Email Address', [validators.DataRequired(message="Fill out this field pls"),validators.Length(min=6, max=35)])
+	username = StringField('Username', [validators.DataRequired("Enter some shit here"),validators.Length(min=4, max=25)])
+	email = EmailField('Email address', [validators.DataRequired(), validators.Email()])
 	password=PasswordField('New Password', [validators.DataRequired(),validators.EqualTo('confirm')])
 	confirm = PasswordField('Repeat Password',[validators.DataRequired()])
 	submit = SubmitField("Sign up")
@@ -45,38 +51,67 @@ class Signup(FlaskForm):
 	
 
 class Login(FlaskForm):
-	email = StringField('Email Address', [validators.Length(min=6, max=35)])
+	email = StringField('Email Address', [validators.Email("This field requires a valid email address")])
 	password=PasswordField('Password', [validators.DataRequired()])
+
 
 @app.route("/")
 def home():
+
+
     return render_template("index.html", content="Testing")
+
 
 @app.route("/about")
 def about():
+
     return render_template("about.html", content="AboutTesting")
+
+
+
+@app.route("/login", methods=["POST","GET"])
+def login():
+	form=Login(prefix="b")
+	ph = PasswordHasher()
+	if request.method=="POST":
+		usrLogin= user.query.filter_by(email = form.email.data).first()
+		if usrLogin:
+			try:
+				if ph.verify(usrLogin.password, form.password.data):
+					return redirect(url_for("home"))
+			except:
+				flash("The password you entered is not valid")
+		else:
+			flash("The email or password you enetered not valid ")
+
+	return render_template("login.html",form=form)
 
 @app.route("/signup", methods=["POST","GET"])
 def signup():
-	form= Signup()
+	form= Signup(prefix="a")
 	print("hi")
 	if request.method=="POST":
-		existing_user = User.query.filter_by(name = form.username.data , email = form.email.data).first()
-		print(existing_user)
-		if existing_user:
+		existing_name = user.query.filter_by(name = form.username.data).first()
+		existing_email = user.query.filter_by(email = form.email.data).first()
+		if existing_name or existing_email:
 			print("This is bad news")
-			return make_response(f"The name or the gmail you enter is already created")
+			flash("The email or user name are already created")
 
 		else:
+			print("hi")
+			ph = PasswordHasher()
+			name=form.username.data
+			email=form.email.data
+			hashed_pw = ph.hash(form.password.data)
 			
-			user= User(form.username.data,form.email.data,form.password.data)
-			print(user)
-			db.create_all()
-			db.session.add(user)
+			usr= user(name=name, email=email, password=hashed_pw)
+			
+			db.session.add(usr)
+			print(usr)
 			db.session.commit()
-			
+
 			print("Saved")
-			#flash('Thanks for registering')
+			flash('Thanks for registering')
 			return redirect(url_for("home"))
 
     
@@ -84,10 +119,9 @@ def signup():
 
 	return render_template("signup.html",form=form)
 
-@app.route("/login", methods=["POST","GET"])
-def login():
-    return render_template("login.html")
+
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+	db.create_all()
+	app.run(debug=True)

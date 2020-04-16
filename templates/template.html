@@ -20,6 +20,7 @@
       .PYG-nav-items {
           font-family: 'Ubuntu Mono', monospace;
       }
+
       {% block css %}
       {% endblock %}
     </style>
@@ -27,6 +28,7 @@
   
   <body>
     <!--header -->
+
     <div class="bg-dark">
       <div class="container">
         <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4  bg-dark border-bottom box-shadow">
@@ -46,10 +48,13 @@
       </div>
     </div>
     <!--header end-->
-
+     
     <!--main body -->
+    
     {% block content %}
     {% endblock %}
+     
+    
     <!--main body end-->
 
     <!--footer-->
@@ -61,6 +66,3 @@
     <!--footer end -->
   </body>
 </html>
-
-
-

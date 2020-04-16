@@ -5,29 +5,30 @@
 {% block css %}
 {% endblock %}
 
+
 {% block content %}
 
 <div class="container d-flex text-center PYG-scroll-child " style="width:20vw; height:100vh;">
 
-  <form class="signin" style="margin-top: auto; margin-bottom: auto;">
+  <form method="post" class="signin" style="margin-top: auto; margin-bottom: auto;">
 
     <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10vw;">
     <h1 class="mb-4"> Sign Up </h1>
-    <label for="signupNickname" class="sr-only">Nickname</label>
-    <input style="width:20rem; margin-left:auto;margin-right:auto;" type="text"
-           id="signupNickname" class="form-control" placeholder="Nickname"
-           required="" autofocus="">
-    <label for="signupEmail" class="sr-only">Email</label>
-    <input style="margin-left:auto;margin-right:auto;width:20rem;"
-           type="email" id="signupEmail" class="form-control" placeholder="Email" required="">
-    <label for="signupPassword" class="sr-only">Password</label>
-    <input style="width:20rem; margin-left:auto;margin-right:auto;" type="password" id="signupPassword" class="form-control" placeholder="Password" required="">
+     {% with messages = get_flashed_messages() %}
+        {% if messages %}
+                   {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+          
+        {% endif %}
+      {% endwith %}
+    {{ form.hidden_tag() }}
+    {{ form.username(placeholder="Nickname", size=40,style="width: 20vw; height:40px;") }}
+    {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;") }}
+    {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}
+    {{ form.confirm(placeholder="Confirm Passwaord",size=40,style="width: 20vw; height:40px;") }}
+    <button style="margin-left:auto; margin-right: auto;width: 20vw;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 
-    <label for="signupPasswordConfirm" class="sr-only">Confirm Password</label>
-    <input style="width:20rem; margin-left:auto;margin-right:auto;" type="password"
-           id="signupPasswordConfirm" class="form-control mb-3" placeholder="Confirm Password" required="">
-    
-    <button style="margin-left:auto; margin-right: auto; width: 10rem;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
   </form>
 </div>
