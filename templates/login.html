@@ -13,10 +13,7 @@ overflow-y: scroll;
 {% endblock %}
 
 {% block content %}
-<div class="container d-flex text-center PYG-scroll-child" style="width:100vw;
-                                                                  height:100vh;
-                                                                  margin-right:auto;
-                                                                  margin-left:auto;">
+<div class="container d-flex text-center PYG-scroll-child" style="width:20vw; height:100vh">
 
   <form method="post" class="signin" style="margin-top: auto; margin-bottom: auto;">
     <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10vw;">
@@ -31,9 +28,9 @@ overflow-y: scroll;
     {% endwith %}
     {{ form.hidden_tag() }}
     {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;", type="email") }}
-    {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}
+    {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;",class="mb-3") }}
 
-    <a href="/signup"><p style="margin-left:5 "><small>Don't have an account</small></a>
+    <a href="/signup" ><p style="margin-left:5 "><small>Don't have an account?</small></a>
     <span>
     <button style="margin-left:auto; margin-right: auto; width: 10rem;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">© 2017-2020</p>

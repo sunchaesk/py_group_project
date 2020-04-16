@@ -1,9 +1,17 @@
 
 body {
     display: flex;
-    display-direction: column;
+    flex-direction: column;
+
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
 }
 
 a.PYG-nav-items {
-    font-size: 20px;
+    font-size: 21px;
 }
+
+

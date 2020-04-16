@@ -12,31 +12,27 @@ background-size: cover;
 background-color: #49d3e9;
 }
 
-{% endblock %}
-
-{% block content %}
-  <div class="jumbotron jumbotron-fluid PYG-jumbo-header-img">
-    <div class="container">
-      <h1 class="text-center PYG-IBM-font py-4"><mark class="PYG-bg-lightblue">>>> About Us: Python Thing</mark></h1>
-    </div>
-  </div>
-  <div class="container">
-    <p class="text-center" style="font-size:30px;"> Python Thing Group is a group on discord specifically for Python
-    beginners. You can interact with other group memebers to develop programming
-    skills.
-  </div>
+.PYG-button-center{
+display: block;
+max-width: 300px;
+margin: auto;
+}
 
 {% endblock %}
 
 {% block content %}
-  <div class="jumbotron jumbotron-fluid PYG-jumbo-header-img">
-    <div class="container">
-      <h1 class="text-center PYG-IBM-font py-4"><mark class="PYG-bg-lightblue">>>> About Us: Python Thing</mark></h1>
-    </div>
-  </div>
+<div class="jumbotron jumbotron-fluid PYG-jumbo-header-img">
   <div class="container">
-    <p class="text-center" style="font-size:30px;"> Python Thing Group is a group on discord specifically for Python
-    beginners. You can interact with other group memebers to develop programming
-    skills.
+    <h1 class="text-center PYG-IBM-font py-4"><mark class="PYG-bg-lightblue">>>> About Us: Python Thing</mark></h1>
   </div>
+</div>
+<div class="container">
+  <p class="text-center" style="font-size:30px;"> Python Thing Group is a group on discord specifically for Python
+    beginners. You can interact with other group memebers to develop programming
+    skills.</p>
+  <br>
+  <a href="https://discord.gg/UqWqQf" class="btn btn-info btn-lg PYG-button-center"
+     style="">Join Now on Discord</a>
+</div>
+
 {% endblock %}
