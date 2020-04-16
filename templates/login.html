@@ -17,6 +17,7 @@ overflow-y: scroll;
                                                                   height:100vh;
                                                                   margin-right:auto;
                                                                   margin-left:auto;">
+
   <form method="post" class="signin" style="margin-top: auto; margin-bottom: auto;">
     <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10vw;">
     <h1 class="mb-4"> Log In </h1>
@@ -31,6 +32,7 @@ overflow-y: scroll;
     {{ form.hidden_tag() }}
     {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;", type="email") }}
     {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}
+
     <a href="/signup"><p style="margin-left:5 "><small>Don't have an account</small></a>
     <span>
     <button style="margin-left:auto; margin-right: auto; width: 10rem;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
