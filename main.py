@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.fields import SelectField, SubmitField, TextField, StringField, PasswordField
 import time
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, ValidationError
 from flask_wtf.csrf import CSRFProtect
 import flask_wtf
 from flask_sqlalchemy import SQLAlchemy
@@ -57,8 +57,6 @@ class Login(FlaskForm):
 
 @app.route("/")
 def home():
-
-
     return render_template("index.html", content="Testing")
 
 
@@ -82,20 +80,27 @@ def login():
 			except:
 				flash("The password you entered is not valid")
 		else:
-			flash("The email or password you enetered not valid ")
+			flash("The email or password you entered is not valid ")
 
 	return render_template("login.html",form=form)
+
+
 
 @app.route("/signup", methods=["POST","GET"])
 def signup():
 	form= Signup(prefix="a")
 	print("hi")
 	if request.method=="POST":
+		psswd = form.password.data
+		psswd_confirm = form.confirm.data
+		if psswd != psswd_confirm:
+			flash("Input for Password and Confirm Password field doesn't match")
+			return redirect(url_for("signup"))
 		existing_name = user.query.filter_by(name = form.username.data).first()
 		existing_email = user.query.filter_by(email = form.email.data).first()
 		if existing_name or existing_email:
 			print("This is bad news")
-			flash("The email or user name are already created")
+			flash("The email or username are already created")
 
 		else:
 			print("hi")

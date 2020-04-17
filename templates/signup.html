@@ -14,20 +14,20 @@
 
     <img class="mb-4" src="{{url_for("static", filename="images/python-logo.png")}}"style="width:10vw;">
     <h1 class="mb-4"> Sign Up </h1>
-     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-                   {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-          
-        {% endif %}
-      {% endwith %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+    
+    {% endif %}
+    {% endwith %}
     {{ form.hidden_tag() }}
     {{ form.username(placeholder="Nickname", size=40,style="width: 20vw; height:40px;") }}
     {{ form.email(placeholder="Email" ,size=40, style="width: 20vw; height:40px;") }}
     {{ form.password(placeholder="Password",size=40,style="width: 20vw; height:40px;") }}
     {{ form.confirm(placeholder="Confirm Passwaord",size=40,style="width: 20vw; height:40px;") }}
-    <button style="margin-left:auto; margin-right: auto;width: 20vw;" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-info btn-lg mt-4" type="submit">Sign Up</button>
 
     <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
   </form>
